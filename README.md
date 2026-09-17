@@ -7,7 +7,7 @@ quality reporting).
 
 **[View the live interactive Power BI report →](PASTE_YOUR_PUBLISH_TO_WEB_LINK_HERE)**
 
-![Executive Dashboard](screenshots/executive_dashboard.png)
+
 
 ## Why this project exists
 
