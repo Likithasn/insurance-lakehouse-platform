@@ -5,7 +5,7 @@ Databricks Lakehouse (medallion architecture) → dbt (transformation,
 testing, lineage) → Power BI (executive, claims, agent, and data
 quality reporting).
 
-**[View the live interactive Power BI report →](PASTE_YOUR_PUBLISH_TO_WEB_LINK_HERE)**
+
 
 
 
