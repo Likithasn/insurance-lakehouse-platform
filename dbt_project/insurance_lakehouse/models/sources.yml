@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: bronze
+    catalog: workspace
+    schema: default
+    tables:
+      - name: bronze_policies
+        description: Raw policy data as ingested from the enriched CSV, no transformation applied.
+      - name: bronze_agents
+        description: Raw agent/broker data.
+      - name: bronze_claims
+        description: Raw claims data.
+      - name: bronze_payments
+        description: Raw payment data.

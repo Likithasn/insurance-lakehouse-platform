@@ -1,0 +1,20 @@
+# This file goes in ~/.dbt/profiles.yml on your machine — NOT inside the
+# project folder itself. dbt looks for it there by default.
+#
+# Get the host / http_path from the same "Connection Details" screen you
+# already used for Power BI. Get the token from Databricks:
+#   User Settings -> Developer -> Access Tokens -> Generate new token
+# (If Free Edition doesn't offer PATs, use OAuth instead — see the
+# dbt-databricks docs for the `auth_type: oauth` variant of this file.)
+
+insurance_lakehouse:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      catalog: workspace
+      schema: default
+      host: dbc-d09140bf-cb07.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/00cece1d6bc4d713
+      token: "{{ env_var('DBT_DATABRICKS_TOKEN') }}"
+      threads: 4

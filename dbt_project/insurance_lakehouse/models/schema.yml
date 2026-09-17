@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: silver_policies
+    description: Cleaned, deduplicated policy data.
+    columns:
+      - name: policy_id
+        tests:
+          - unique
+          - not_null
+
+  - name: silver_claims
+    description: Cleaned claims, with the claim_amount > 0 data quality rule applied.
+    columns:
+      - name: claim_id
+        tests:
+          - unique
+          - not_null
+
+  - name: quarantine_payments
+    description: Payment records with inconsistent status/amount combinations, held for review.
+
+  - name: dim_agent
+    columns:
+      - name: agent_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_customer
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_policy
+    columns:
+      - name: policy_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_policy
+    description: One row per policy — the core policy-grain fact table.
+    columns:
+      - name: policy_id
+        tests:
+          - unique
+          - not_null
+      - name: agent_id
+        tests:
+          - relationships:
+              to: ref('dim_agent')
+              field: agent_id
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
+
+  - name: fact_claims
+    description: One row per claim, joined with its payment outcome and settlement time.
+    columns:
+      - name: claim_id
+        tests:
+          - unique
+          - not_null
+      - name: policy_id
+        tests:
+          - relationships:
+              to: ref('dim_policy')
+              field: policy_id
