@@ -5,9 +5,7 @@ Databricks Lakehouse (medallion architecture) → dbt (transformation,
 testing, lineage) → Power BI (executive, claims, agent, and data
 quality reporting).
 
-
-
-
+![Executive Dashboard](screenshots/executive_dashboard.png)
 
 ## Why this project exists
 
@@ -45,6 +43,9 @@ Databricks SQL Warehouse
      │
      ▼
 Power BI  (reporting layer only — no transformation happens here)
+     │
+     ▼
+Power BI Service (published, refreshed live from the SQL Warehouse)
 ```
 
 **Why two tools, not one:** PySpark handles ingestion because it can
@@ -80,7 +81,7 @@ unexplained blank in downstream reporting. Full writeup in
 ```
 ├── notebooks/          PySpark notebooks (Bronze ingestion + enrichment)
 ├── dbt_project/        dbt project — Silver + Gold models, tests, docs
-├── powerbi/            .pbix file (see note below on viewing it)
+├── powerbi/            .pbix file
 ├── docs/               Architecture, data dictionary, design decisions
 └── screenshots/        Dashboard screenshots (all 4 pages)
 ```
@@ -94,15 +95,13 @@ unexplained blank in downstream reporting. Full writeup in
 | Agent & Underwriting | Commission vs. claim rate, regional premium, volume-vs-risk |
 | Audit / Data Quality | Quarantined records, amount at risk, full audit trail |
 
-See `screenshots/` for static images of each page, or use the live
-link at the top of this README for the interactive version.
+![Claims Dashboard](screenshots/claims_dashboard.png)
+![Agent & Underwriting Dashboard](screenshots/agent_underwriting_dashboard.png)
+![Audit / Data Quality Dashboard](screenshots/audit_data_quality_dashboard.png)
+
+To explore the report interactively, open `powerbi/*.pbix` in Power BI
+Desktop (free).
 
 ## Tech stack
 Databricks (Delta Lake, Unity Catalog, SQL Warehouse), PySpark, dbt,
-SQL, Power BI (DAX, Power Query, data modeling).
-
-## Note on the `.pbix` file
-GitHub cannot render Power BI files directly — clicking `powerbi/*.pbix`
-in this repo will only download it, not display it. Use the live
-"Publish to web" link above to view the interactive report in a
-browser, or open the `.pbix` locally in Power BI Desktop.
+SQL, Power BI (DAX, Power Query, data modeling, Power BI Service).
